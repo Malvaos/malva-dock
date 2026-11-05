@@ -1,0 +1,20 @@
+[package]
+name = "malva-dock"
+version = "0.2.0"
+edition = "2021"
+rust-version = "1.74"
+description = "The Malva OS dock: a macOS-style dock with fisheye magnification, written in Rust with Slint"
+license = "MIT"
+build = "build.rs"
+
+[dependencies]
+slint = "1.8"
+
+[build-dependencies]
+slint-build = "1.8"
+
+
+[profile.release]
+opt-level = 3
+lto = "thin"
+strip = true
