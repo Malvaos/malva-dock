@@ -26,12 +26,9 @@ export global Theme {
     // Leave empty for the system UI font, or set a family such as "Inter".
     in-out property <string> font: "";
 
-    // Malva palette, approximated from its description. Swap in the exact swatches here.
-    out property <color> lilac-light: #efe5f7;
-    out property <color> lilac: #d6bdec;
-    out property <color> orchid: #e58bd2;
-    out property <color> plum: #5c2256;
-    out property <color> leaf: #7be0a4;
+    // The lilac of the Malva icon theme (the top stop of its symbol gradient). Used for the letter
+    // on the plain tile, so a custom entry without an image reads like the rest of the set.
+    out property <color> lilac: #fbf3fa;
 
     out property <brush> bar: dark
         ? @linear-gradient(180deg, #3a3a40d6 0%, #1d1d21dc 100%)
@@ -43,158 +40,73 @@ export global Theme {
     out property <color> tip-fg: #ffffff;
 }
 
-// Built-in Malva system icons: one glyph on a gradient tile. Glyphs are SVG paths on a 24x24 grid.
+// Built-in Malva system icons. They come from the Malva icon theme: one scalable SVG per icon, each
+// already drawn on its own tile with its light and colour, so the dock only has to place it.
+// The files live in assets/icons (see the README there for where each one comes from) and Slint
+// embeds them in the binary at build time.
 global Icons {
-    public pure function path(key: string) -> string {
-        if (key == "apps") {
-            return "M6 6 H6.1 M12 6 H12.1 M18 6 H18.1 M6 12 H6.1 M12 12 H12.1 M18 12 H18.1 M6 18 H6.1 M12 18 H12.1 M18 18 H18.1";
-        }
-        if (key == "files") {
-            return "M3.5 7.5 A1.5 1.5 0 0 1 5 6 H9.2 L11.2 8 H19 A1.5 1.5 0 0 1 20.5 9.5 V17 A1.5 1.5 0 0 1 19 18.5 H5 A1.5 1.5 0 0 1 3.5 17 Z";
-        }
-        if (key == "browser") {
-            return "M20.5 12 A8.5 8.5 0 1 1 3.5 12 A8.5 8.5 0 1 1 20.5 12 Z M3.5 12 H20.5 M12 3.5 C9.2 6.8 9.2 17.2 12 20.5 M12 3.5 C14.8 6.8 14.8 17.2 12 20.5 M5.2 8.2 H18.8 M5.2 15.8 H18.8";
-        }
-        if (key == "notes") {
-            return "M7 4.5 H17 A2 2 0 0 1 19 6.5 V17.5 A2 2 0 0 1 17 19.5 H7 A2 2 0 0 1 5 17.5 V6.5 A2 2 0 0 1 7 4.5 Z M8.5 9.5 H15.5 M8.5 13 H15.5 M8.5 16.5 H12.5";
-        }
-        if (key == "calculator") {
-            return "M7 3.5 H17 A2 2 0 0 1 19 5.5 V18.5 A2 2 0 0 1 17 20.5 H7 A2 2 0 0 1 5 18.5 V5.5 A2 2 0 0 1 7 3.5 Z M8.5 8 H15.5 M8.6 12.2 H8.7 M12 12.2 H12.1 M15.3 12.2 H15.4 M8.6 15.6 H8.7 M12 15.6 H12.1 M15.3 15.6 H15.4";
-        }
-        if (key == "terminal") {
-            return "M6 8 L11 12 L6 16 M13 16.5 H18.5";
-        }
-        if (key == "keyboard") {
-            return "M5 7 H19 A2 2 0 0 1 21 9 V15 A2 2 0 0 1 19 17 H5 A2 2 0 0 1 3 15 V9 A2 2 0 0 1 5 7 Z M7 10.3 H7.1 M10.3 10.3 H10.4 M13.6 10.3 H13.7 M16.9 10.3 H17 M8.5 13.7 H15.5";
-        }
-        if (key == "settings") {
-            return "M4.5 7 H7.2 M10.8 7 H19.5 M10.8 7 A1.8 1.8 0 1 1 7.2 7 A1.8 1.8 0 1 1 10.8 7 Z M4.5 12 H13.2 M16.8 12 H19.5 M16.8 12 A1.8 1.8 0 1 1 13.2 12 A1.8 1.8 0 1 1 16.8 12 Z M4.5 17 H5.2 M8.8 17 H19.5 M8.8 17 A1.8 1.8 0 1 1 5.2 17 A1.8 1.8 0 1 1 8.8 17 Z";
-        }
-        if (key == "downloads") {
-            return "M12 4.5 V14.5 M7.5 10.5 L12 15 L16.5 10.5 M5 19.5 H19";
-        }
-        if (key == "trash") {
-            return "M4.5 7 H19.5 M9.5 7 V5 A1 1 0 0 1 10.5 4 H13.5 A1 1 0 0 1 14.5 5 V7 M6.5 7 L7.5 19 A1.5 1.5 0 0 0 9 20.5 H15 A1.5 1.5 0 0 0 16.5 19 L17.5 7 M10 11 V16.5 M14 11 V16.5";
-        }
-        return "M 0 0";
-    }
+    out property <image> apps: @image-url("../assets/icons/launcher.svg");
+    out property <image> files: @image-url("../assets/icons/files.svg");
+    out property <image> browser: @image-url("../assets/icons/applications-internet.svg");
+    out property <image> notes: @image-url("../assets/icons/text-editor.svg");
+    out property <image> calculator: @image-url("../assets/icons/calculator.svg");
+    out property <image> fonts: @image-url("../assets/icons/preferences-desktop-font.svg");
+    out property <image> terminal: @image-url("../assets/icons/terminal.svg");
+    out property <image> keyboard: @image-url("../assets/icons/preferences-desktop-keyboard.svg");
+    out property <image> settings: @image-url("../assets/icons/settings.svg");
+    out property <image> downloads: @image-url("../assets/icons/folder-download.svg");
+    out property <image> trash: @image-url("../assets/icons/user-trash.svg");
+    // The plain Malva tile that carries the letter of a custom entry that has no image.
+    out property <image> tile: @image-url("../assets/icons/tile.svg");
 
-    public pure function top(key: string) -> color {
-        if (key == "apps") { return #ffffff; }
-        if (key == "files") { return #e07cc8; }
-        if (key == "browser") { return #c3a9f0; }
-        if (key == "notes") { return #f7eefb; }
-        if (key == "calculator") { return #4b4b52; }
-        if (key == "fonts") { return #ffffff; }
-        if (key == "terminal") { return #303036; }
-        if (key == "keyboard") { return #8b8b94; }
-        if (key == "settings") { return #b5b5be; }
-        if (key == "downloads") { return #4fa57f; }
-        if (key == "trash") { return Theme.dark ? #ffffff3a : #0000002a; }
-        return #8e8e96;
-    }
-
-    public pure function bottom(key: string) -> color {
-        if (key == "apps") { return #d9d4e2; }
-        if (key == "files") { return #8f3480; }
-        if (key == "browser") { return #7452c9; }
-        if (key == "notes") { return #dcc8ef; }
-        if (key == "calculator") { return #1f1f23; }
-        if (key == "fonts") { return #e4dcec; }
-        if (key == "terminal") { return #0f0f12; }
-        if (key == "keyboard") { return #4e4e57; }
-        if (key == "settings") { return #7a7a85; }
-        if (key == "downloads") { return #1f5a41; }
-        if (key == "trash") { return Theme.dark ? #ffffff1a : #00000014; }
-        return #5a5a62;
-    }
-
-    public pure function glyph(key: string) -> color {
-        if (key == "apps") { return Theme.plum; }
-        if (key == "notes") { return Theme.plum; }
-        if (key == "fonts") { return Theme.plum; }
-        if (key == "calculator") { return Theme.orchid; }
-        if (key == "terminal") { return Theme.leaf; }
-        if (key == "trash") { return Theme.dark ? #ffffffe6 : #000000a6; }
-        return #ffffff;
-    }
-
-    // Stroke-width multiplier: the "apps" grid is drawn as dots, so it needs a thick stroke.
-    public pure function weight(key: string) -> float {
-        if (key == "apps") { return 1.9; }
-        return 1;
+    // The picture for an item key (see `BUILT_IN_ICONS` in src/state.rs). Anything that is not a
+    // built-in name, which is what `"custom"` stands for, gets the plain tile.
+    public pure function picture(key: string) -> image {
+        if (key == "apps") { return apps; }
+        if (key == "files") { return files; }
+        if (key == "browser") { return browser; }
+        if (key == "notes") { return notes; }
+        if (key == "calculator") { return calculator; }
+        if (key == "fonts") { return fonts; }
+        if (key == "terminal") { return terminal; }
+        if (key == "keyboard") { return keyboard; }
+        if (key == "settings") { return settings; }
+        if (key == "downloads") { return downloads; }
+        if (key == "trash") { return trash; }
+        return tile;
     }
 }
 
-// One app icon: a gradient tile with a single glyph, an image, or a letter.
+// One dock icon: a Malva theme icon, the user's own image, or a letter on the plain Malva tile.
 component Tile inherits Rectangle {
     in property <DockItem> item;
     in property <bool> down;
 
-    border-radius: self.width * 0.225;
-    background: root.item.has-image ? transparent : @linear-gradient(180deg, Icons.top(root.item.key) 0%, Icons.bottom(root.item.key) 100%);
-    opacity: root.item.has-image && root.down ? 0.7 : 1;
-    drop-shadow-blur: root.item.has-image ? 0px : self.width * 0.14;
-    drop-shadow-color: #00000066;
-    drop-shadow-offset-y: self.width * 0.05;
-    border-width: root.item.has-image ? 0px : 1px;
-    border-color: Theme.dark ? #ffffff30 : #00000022;
+    // A letter is drawn only for a custom entry that has no image.
+    property <bool> letter: root.item.key == "custom" && !root.item.has-image;
 
-    // Soft gloss on the top half.
-    Rectangle {
-        visible: !root.item.has-image;
-        width: parent.width;
-        height: parent.height;
-        border-radius: parent.border-radius;
-        background: @linear-gradient(180deg, #ffffff3c 0%, #ffffff00 55%);
-    }
-
-    Path {
-        visible: root.item.key != "custom" && root.item.key != "fonts";
-        width: parent.width * 0.56;
-        height: self.width;
-        x: (parent.width - self.width) / 2;
-        y: (parent.height - self.height) / 2;
-        viewbox-width: 24;
-        viewbox-height: 24;
-        commands: Icons.path(root.item.key);
-        stroke: Icons.glyph(root.item.key);
-        stroke-width: self.width / 24 * 1.9 * Icons.weight(root.item.key);
-        stroke-line-cap: round;
-        fill: transparent;
-    }
-
-    Text {
-        visible: root.item.key == "fonts" || (root.item.key == "custom" && !root.item.has-image);
-        width: parent.width;
-        height: parent.height;
-        text: root.item.key == "fonts" ? "Aa" : root.item.initial;
-        font-family: Theme.font;
-        font-size: parent.width * 0.4;
-        font-weight: 700;
-        color: Icons.glyph(root.item.key);
-        horizontal-alignment: center;
-        vertical-alignment: center;
-    }
+    // Pressed feedback: the icon dims. (Dimming the picture rather than laying a shade over its
+    // box keeps the corners of the squircle and the bin's open sides clean.)
+    opacity: root.down ? 0.7 : 1;
 
     Image {
-        visible: root.item.has-image;
-        source: root.item.image;
+        source: root.item.has-image ? root.item.image : Icons.picture(root.item.key);
         image-fit: contain;
         width: parent.width;
         height: parent.height;
     }
 
-    // Pressed feedback: the tile darkens.
-    Rectangle {
-        visible: !root.item.has-image;
+    Text {
+        visible: root.letter;
         width: parent.width;
         height: parent.height;
-        border-radius: parent.border-radius;
-        background: root.down ? #00000050 : #00000000;
-        animate background {
-            duration: 90ms;
-        }
+        text: root.item.initial;
+        font-family: Theme.font;
+        font-size: parent.width * 0.4;
+        font-weight: 700;
+        color: Theme.lilac;
+        horizontal-alignment: center;
+        vertical-alignment: center;
     }
 }
 

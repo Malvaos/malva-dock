@@ -4,8 +4,8 @@ The dock for Malva OS: a macOS-style dock written in Rust with [Slint](https://s
 
 - Fisheye magnification: the icon under the pointer grows and its neighbours make room, so nothing overlaps
 - Name label above the hovered icon, a dot under running apps, and a hop while an app starts
-- Eleven built-in Malva icons (one glyph on a gradient tile), or your own SVG / PNG files
-- Dark and light themes; black-and-white glass with the Malva palette on the icons
+- Eleven built-in icons from the Malva icon theme (one scalable SVG each, see `assets/icons`), or your own SVG / PNG files
+- Dark and light themes; black-and-white glass behind the full-colour Malva icons
 - Click an icon to start the app, or to raise it when it is already running (Hyprland, or X11 with `wmctrl`)
 - Pinned apps, icon size and magnification come from a small config file
 - A hardened backend: every config problem is reported with a line number, Hyprland window classes are
@@ -84,8 +84,8 @@ A Slint window is a normal window, so the dock needs a little help from the sess
 
 | To change                        | Edit                                                         |
 | -------------------------------- | ------------------------------------------------------------ |
-| Palette, bar colours, font       | the `Theme` global at the top of `ui/dock.slint`             |
-| Built-in icons and tile colours  | the `Icons` global in `ui/dock.slint` (glyphs are SVG paths on a 24x24 grid) |
+| Bar colours, font                | the `Theme` global at the top of `ui/dock.slint`             |
+| Built-in icons                   | the SVG files in `assets/icons` and the `Icons` global in `ui/dock.slint` that maps each name to one |
 | How far magnification reaches    | `reach` in `DockWindow`                                      |
 | Spacing                          | `GAP` in `src/geometry.rs`                                   |
 | Default apps                     | `packaging/dock.conf`                                        |

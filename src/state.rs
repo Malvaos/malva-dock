@@ -19,7 +19,8 @@ use crate::{DockItem, DockWindow};
 /// How long an icon hops after a click, if the app does not show up as running sooner.
 pub const LAUNCH_HOP: Duration = Duration::from_secs(6);
 
-/// Icons that are drawn by the UI itself.
+/// The icons the dock ships with: Malva icon theme SVGs in `assets/icons`, mapped to these names
+/// by the `Icons` global in `ui/dock.slint`. Keep the two lists in step.
 pub const BUILT_IN_ICONS: [&str; 11] = [
     "apps",
     "files",

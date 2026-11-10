@@ -2,6 +2,7 @@
 Type=Application
 Name=Malva Dock
 Comment=The Malva OS dock
+Icon=malva
 Exec=malva-dock
 Terminal=false
 Categories=System;

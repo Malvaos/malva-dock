@@ -1,3 +1,14 @@
+# Unreleased
+
+- **Icons from the Malva icon theme.** The eleven built-in icons were hand-coded stroke glyphs on a
+  gradient tile inside `ui/dock.slint`. They are now the theme's own SVGs (`assets/icons`), each one
+  already drawn on its tile, so the dock looks like the rest of Malva OS. Names in `dock.conf` are
+  unchanged. Calculator had no tile in the theme, so one was generated with the theme's tools
+  (same recipe, sizing and centring rule). The letter-initial fallback for a custom entry without an
+  image now sits on a plain Malva tile. See `assets/icons/README.md` for where each file comes from.
+
+---
+
 # Changelog: 0.1.0 → 0.2.0
 
 Everything below was found by a full audit of the original sources, fixed, and locked
